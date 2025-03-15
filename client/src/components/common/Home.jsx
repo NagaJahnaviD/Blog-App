@@ -23,7 +23,7 @@ function Home() {
         console.log(message, payload)
         if (message === 'author') {
           setCurrentUser({ ...currentUser, ...payload })
-          //save user to localstorage
+          //save user to localstorage(in case of refresh, to not lose data)
           localStorage.setItem("currentuser",JSON.stringify(payload))
           // setError(null)
         } else {
