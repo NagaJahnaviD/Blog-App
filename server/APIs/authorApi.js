@@ -33,20 +33,27 @@ authorApp.get('/unauthorized',(req,res)=>{
 
 //modify an article by article id
 authorApp.put('/article/:articeleId',requireAuth({signInUrl:"unauthorized"}),expressAsyncHandler(async(req,res)=>{
-    //get modified article
-    const modifiedArticle=req.body
-    const dbRes=await Article.findByIdAndUpdate(modifiedArticle._id,{...modifiedArticle},{returnQriginal:false})//if this not used then the original is sent
-    //send res
-    res.status(200).send({message:"article modified",paylode:dbRes}) 
+     //get modified article
+     const modifiedArticle = req.body;
+     //update article by article id
+     const latestArticle = await Article.findByIdAndUpdate(modifiedArticle._id,
+         { ...modifiedArticle },
+         { returnOriginal: false })
+     //send res
+     res.status(200).send({ message: "article modified", payload: latestArticle }) 
 }))
 
-//delete(soft wala)
-authorApp.put('/articles/:articeleId',requireAuth({signInUrl:"unauthorized"}),expressAsyncHandler(async(req,res)=>{
+//delete(soft delete) an article by article id
+authorApp.put('/articles/:articleId',expressAsyncHandler(async (req, res) => {
+
     //get modified article
-    const modifiedArticle=req.body
-    const dbRes=await Article.findByIdAndUpdate(modifiedArticle._id,{...modifiedArticle},{returnQriginal:false})//if this not used then the original is sent
+    const modifiedArticle = req.body;
+    //update article by article id
+    const latestArticle = await Article.findByIdAndUpdate(modifiedArticle._id,
+        { ...modifiedArticle },
+        { returnOriginal: false })
     //send res
-    res.status(200).send({message:"article deleted",paylode:dbRes}) 
+    res.status(200).send({ message: "article deleted or restored", payload: latestArticle })
 }))
 
 module.exports=authorApp;

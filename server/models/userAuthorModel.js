@@ -12,8 +12,8 @@ const userAuthorSchema=new mongoose.Schema({
         required:true
     },
     lastName:{
-        type:String,
-        required:true
+        type:String 
+        // this is optional in google server
     },
     email:{
         type:String,

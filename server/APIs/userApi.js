@@ -18,7 +18,7 @@ userApp.put('/comment/:articleId',expressAsyncHandler(async(req,res)=>{
         {articleId:req.params.articleId},
         {$push:{comments:commentObj}},
         {returnOriginal:false})
-        res.status(200).send({message:"commenr added",paylode:articleWithComments})
+        res.status(200).send({message:"comment added",paylode:articleWithComments})
 }))
 
 module.exports=userApp;
